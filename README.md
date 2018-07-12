@@ -18,17 +18,30 @@ git clone https://github.com/ARMmbed/mbed-os-dependency-wheel
 ## Running the Analysis   
 Once you have generated your build:
 * Run the depend.py tool as below.   
-   .\depend.py [Path to .map file]
-   For example:   
-   .\depend.py C:\github\my-test-app\BUILD\k64f\arm\my-test-app.map   
+   ```bash
+   depend.py [Path to .map file]
+   ```
+   For example:
+   ```bash  
+   depend.py C:\github\my-test-app\BUILD\k64f\arm\my-test-app.map
+   ```   
 * Open the index.html under your cloned tool directory to see the dependency wheel.
+* If you want to see detailed information on what symbols each object file exports and what symbols
+  each object depends on, you can run the tool with **-v** option as below. This will generate a file
+  named **mbedos-dependencies.log** containing more information on symbols exported and required by
+  each object file.
+   ```bash
+   depend.py [Path to .map file] -v
+   ```
 
-## Interpreting the depedency wheel
+## Interpreting the dependency wheel
 In the chart, each object file appears on the periphery of the wheel and if it has outbound or inbound dependency
 with any other object files you will be see ribbon lines connecting them to corresponding object files. If an object file
 has inbound dependency, meaning if another object is using a symbol exported by this object file, you will see a line
-connecting these two objects with wide edge connected to the object exporting the symbol and narrow edge attached to the
-caller or the object file using/depending on that symbol. If its an outbound dependency, it would be vice-versa.
+connecting these two objects with wide end connected to the object exporting the symbol and narrow end attached to the
+caller or the object file using/depending on that symbol. If its an outbound dependency, it would be vice-versa. There
+is also a possibility that two objects are mutually dependent on symbols exported by each other. In that case you will
+see a line connecting these objects with wide ends on both ends of the line.   
 
 ## Interactive Example
 [Click Here](https://senramakri.github.io/mbed-os-dependency-wheel/index.html) for an interactive example.
