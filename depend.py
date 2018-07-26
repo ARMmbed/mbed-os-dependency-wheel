@@ -70,7 +70,7 @@ if __name__ == '__main__':
     idx = 0
     for eachline in objlines:
         objfile = eachline.split('(')[0].strip()
-        if(os.path.exists(objfile)):
+        if(os.path.exists(objfile) and os.path.isfile(objfile)):
             idx += 1
             if(objfile not in objectsset):
                 get_object_symbols(objfile)
